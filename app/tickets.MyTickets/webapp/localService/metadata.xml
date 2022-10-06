@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ticketsService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Contact" EntityType="ticketsService.Contact"/>
+                <EntitySet Name="Ticket" EntityType="ticketsService.Ticket">
+                    <NavigationPropertyBinding Path="contact" Target="Contact"/>
+                    <NavigationPropertyBinding Path="correspondence" Target="Correspondence"/>
+                </EntitySet>
+                <EntitySet Name="Correspondence" EntityType="ticketsService.Correspondence">
+                    <NavigationPropertyBinding Path="ticket" Target="Ticket"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Contact">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="email" Type="Edm.String" MaxLength="100"/>
+                <Property Name="creditcard" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Ticket">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="subject" Type="Edm.String" MaxLength="100"/>
+                <Property Name="language" Type="Edm.String" MaxLength="100"/>
+                <Property Name="category" Type="Edm.String" MaxLength="100"/>
+                <Property Name="status" Type="Edm.String" MaxLength="100"/>
+                <Property Name="priority" Type="Edm.String" MaxLength="100"/>
+                <Property Name="externalreference" Type="Edm.String" MaxLength="100"/>
+                <Property Name="note" Type="Edm.String"/>
+                <NavigationProperty Name="contact" Type="ticketsService.Contact">
+                    <ReferentialConstraint Property="contact_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="contact_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="correspondence" Type="Collection(ticketsService.Correspondence)" Partner="ticket">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Correspondence">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="subject" Type="Edm.String" MaxLength="100"/>
+                <Property Name="message" Type="Edm.String" MaxLength="100"/>
+                <Property Name="status" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="ticket" Type="ticketsService.Ticket" Partner="correspondence">
+                    <ReferentialConstraint Property="ticket_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ticket_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <Annotations Target="ticketsService.Contact/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ticketsService.Ticket/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ticketsService.Correspondence/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
