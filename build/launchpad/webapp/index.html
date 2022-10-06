@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title> Project Preview </title>
+    <title> Application Overview </title>
     <script src="shared-config.js"></script>
     <script src="https://ui5.sap.com/1.104.2/resources/sap-ui-core.js" 
             id="sap-ui-bootstrap"
@@ -28,7 +28,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"ticketsService","DetailsURL":"./service/tickets/","Metadata":"./service/tickets/$metadata","Entities":[{"Name":"Contact","URL":"./service/tickets/Contact","FioriURL":"$fiori-preview/ticketsService/Contact#preview-app"},{"Name":"Ticket","URL":"./service/tickets/Ticket","FioriURL":"$fiori-preview/ticketsService/Ticket#preview-app"}],"EntitiesCount":2}]}
+                            const data = {"Services":[{"ServiceName":"ticketsService","DetailsURL":"./service/tickets/","Metadata":"./service/tickets/$metadata","Entities":[{"Name":"Contact","URL":"./service/tickets/Contact","FioriURL":""},{"Name":"Ticket","URL":"./service/tickets/Ticket","FioriURL":""}],"EntitiesCount":2}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });
