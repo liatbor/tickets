@@ -11,7 +11,7 @@ stages:
     npmExecuteScripts: false
     karmaExecuteTests: false
   Acceptance:
-    cloudFoundryDeploy: true
+    cloudFoundryDeploy: false
     cfApiEndpoint: "https://api.cf.eu10.hana.ondemand.com"
     cfOrg: "TechEdLCAP_lcapteched2021"
     cfSpace: "dev"
